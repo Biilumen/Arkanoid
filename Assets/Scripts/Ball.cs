@@ -5,6 +5,7 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private Transform _previousPosition;
     [SerializeField] private float _speed;
+    [SerializeField] private ParticleSystem _particle;
 
     private Vector3 _flyDirection;
     private Rigidbody _rigidbody;
@@ -16,7 +17,6 @@ public class Ball : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _previousPosition.position = transform.position;
         _rigidbody.AddForce(_reflectDirection*_speed, ForceMode.Impulse);
-        
     }
 
     private void Update()
@@ -34,7 +34,6 @@ public class Ball : MonoBehaviour
     {
         _rigidbody.AddForce(_flyDirection * _speed, ForceMode.Impulse);
         _collisionPosition = transform.position;
-        print(_rigidbody.velocity+"велосити");
-        print("Тук");
+        _particle.Play();
     }
 }
