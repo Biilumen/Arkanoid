@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using RayFire;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent (typeof(BoxCollider))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _heath;
@@ -10,11 +12,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform _plane;
     [SerializeField] private List<Transform> _blocks;
 
+    private BoxCollider _boxCollider;
     private Animator _animator;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        _boxCollider = GetComponent<BoxCollider>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -32,11 +36,8 @@ public class Enemy : MonoBehaviour
         {
             _rayfire.Explode(0f);
             _animator.enabled = false;
-
-            foreach (var block in _blocks)
-            {
-                block.SetParent(_plane);
-            }
+            _boxCollider.enabled = false;
+            transform.SetParent(_plane);
         }
     }
 }
