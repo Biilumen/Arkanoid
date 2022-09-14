@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Deliter : MonoBehaviour
 {
+
     private void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
+        print("sss");
     }
 }

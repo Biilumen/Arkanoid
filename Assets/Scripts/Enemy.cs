@@ -4,40 +4,54 @@ using UnityEngine;
 using RayFire;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent (typeof(BoxCollider))]
-public class Enemy : MonoBehaviour
+[RequireComponent(typeof(BoxCollider))]
+public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _heath;
-    [SerializeField] private RayfireBomb _rayfire;
-    [SerializeField] private Transform _plane;
-    [SerializeField] private List<Transform> _blocks;
+    [SerializeField] protected int Heath;
+    [SerializeField] protected RayfireBomb Rayfire;
+    [SerializeField] protected Transform Plane;
+    [SerializeField] protected RayfireRigidRoot RayfireRoot;
+    [SerializeField] protected List<Transform> EnemyTransforms;
+    [SerializeField] private List<Rigidbody> _rigidbodies;
 
-    private BoxCollider _boxCollider;
-    private Animator _animator;
+    protected BoxCollider BoxCollider;
+    protected Animator Animator;
 
-    private void Start()
+    protected void Start()
     {
-        _animator = GetComponent<Animator>();
-        _boxCollider = GetComponent<BoxCollider>();
-    }
+        Animator = GetComponent<Animator>();
+        BoxCollider = GetComponent<BoxCollider>();
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.TryGetComponent(out Ball ball))
+        foreach (var rigidbody in _rigidbodies)
         {
-            TakeDamage();
+            rigidbody.isKinematic = true;
         }
     }
 
-    private void TakeDamage()
+    protected void OnCollisionEnter(Collision collision)
     {
-        _heath--;
-        if(_heath <= 0)
+        if (collision.gameObject.TryGetComponent(out Ball ball))
         {
-            _rayfire.Explode(0f);
-            _animator.enabled = false;
-            _boxCollider.enabled = false;
-            transform.SetParent(_plane);
+            TakeDamage();
+        }
+
+    }
+
+    protected virtual void TakeDamage()
+    {
+        Heath--;
+
+        if (Heath <= 0)
+        {
+            RayfireRoot.Initialize();
+            Rayfire.Explode(0f);
+            BoxCollider.enabled = false;
+            Animator.enabled = false;
+
+            foreach (var rigidbody in _rigidbodies)
+            {
+                rigidbody.isKinematic = false;
+            }
         }
     }
 }
