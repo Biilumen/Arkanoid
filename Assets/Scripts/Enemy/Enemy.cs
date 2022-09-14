@@ -7,21 +7,21 @@ using RayFire;
 [RequireComponent(typeof(BoxCollider))]
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] protected int Heath;
+    [SerializeField] protected int Health;
+    [SerializeField] protected GameObject Cube;
     [SerializeField] protected RayfireBomb Rayfire;
     [SerializeField] protected Transform Plane;
     [SerializeField] protected RayfireRigidRoot RayfireRoot;
     [SerializeField] protected List<Transform> EnemyTransforms;
     [SerializeField] protected Material DeadEnemyMaterial;
-    [SerializeField] protected SkinnedMeshRenderer DeadEnemyMeshRenderer;
+    [SerializeField] protected List<SkinnedMeshRenderer> DeadEnemyMeshRenderers;
+    [SerializeField] protected List<Animator> Animators;
     [SerializeField] private List<Rigidbody> _rigidbodies;
 
     protected BoxCollider BoxCollider;
-    protected Animator Animator;
 
     protected void Start()
     {
-        Animator = GetComponent<Animator>();
         BoxCollider = GetComponent<BoxCollider>();
 
         foreach (var rigidbody in _rigidbodies)
@@ -41,15 +41,24 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void TakeDamage()
     {
-        Heath--;
+        Health--;
 
-        if (Heath <= 0)
+        if (Health <= 0)
         {
             RayfireRoot.Initialize();
             Rayfire.Explode(0f);
             BoxCollider.enabled = false;
-            Animator.enabled = false;
-            DeadEnemyMeshRenderer.material = DeadEnemyMaterial;
+            Destroy(Cube.gameObject);
+
+            foreach (var animator in Animators)
+            {
+                animator.enabled = false;
+            }
+
+            foreach(var deadEnemyMeshRenderer in DeadEnemyMeshRenderers) 
+            {
+                deadEnemyMeshRenderer.material = DeadEnemyMaterial;
+            }
 
             foreach (var transform in EnemyTransforms)
             {

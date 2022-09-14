@@ -10,7 +10,6 @@ public class Plane : MonoBehaviour
         if (other.gameObject.TryGetComponent(out Deliter deliter))
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + _boxCollider.bounds.size.z * _groundMove.PlaneListCount);  
-            print("sad");
         }
         
     }

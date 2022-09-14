@@ -8,6 +8,5 @@ public class Deliter : MonoBehaviour
     {
         collision.transform.SetParent(transform);
         Destroy(collision.gameObject);
-        print("sss");
     }
 }

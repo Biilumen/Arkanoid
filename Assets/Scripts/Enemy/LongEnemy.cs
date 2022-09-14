@@ -8,13 +8,15 @@ using RayFire;
 public class LongEnemy : Enemy
 {
     [SerializeField] private Material _gap;
+    [SerializeField] private GameObject _cube;
     [SerializeField] private MeshRenderer _boxRenderer;
 
     protected override void TakeDamage()
     {
-        if (Heath <= 3)
+        if (Health >= 1)
         {
             _boxRenderer.material = _gap;
+                print("sads");
         }
         base.TakeDamage();
     }
