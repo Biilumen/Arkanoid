@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Deliter : MonoBehaviour
 {
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter (Collision collision)
     {
-        Destroy(other.gameObject);
+        collision.transform.SetParent(transform);
+        Destroy(collision.gameObject);
         print("sss");
     }
 }

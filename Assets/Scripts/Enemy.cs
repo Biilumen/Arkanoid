@@ -12,6 +12,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected Transform Plane;
     [SerializeField] protected RayfireRigidRoot RayfireRoot;
     [SerializeField] protected List<Transform> EnemyTransforms;
+    [SerializeField] protected Material DeadEnemyMaterial;
+    [SerializeField] protected SkinnedMeshRenderer DeadEnemyMeshRenderer;
     [SerializeField] private List<Rigidbody> _rigidbodies;
 
     protected BoxCollider BoxCollider;
@@ -47,6 +49,12 @@ public abstract class Enemy : MonoBehaviour
             Rayfire.Explode(0f);
             BoxCollider.enabled = false;
             Animator.enabled = false;
+            DeadEnemyMeshRenderer.material = DeadEnemyMaterial;
+
+            foreach (var transform in EnemyTransforms)
+            {
+                transform.SetParent(Plane);
+            }
 
             foreach (var rigidbody in _rigidbodies)
             {
