@@ -11,12 +11,11 @@ public class LongEnemy : Enemy
     [SerializeField] private GameObject _cube;
     [SerializeField] private MeshRenderer _boxRenderer;
 
-    protected override void TakeDamage()
+    public override void TakeDamage()
     {
         if (Health >= 1)
         {
             _boxRenderer.material = _gap;
-                print("sads");
         }
         base.TakeDamage();
     }

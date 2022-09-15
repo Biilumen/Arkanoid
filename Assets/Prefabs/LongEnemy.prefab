@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5548417836180033245}
   - component: {fileID: 8052173175157082470}
   - component: {fileID: 2081585325044856500}
-  - component: {fileID: 2074051600}
+  - component: {fileID: 2074051597}
   m_Layer: 0
   m_Name: Cube_sh_1
   m_TagString: Untagged
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2074051600
+--- !u!114 &2074051597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,7 +95,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _root: {fileID: 6350562492444057988}
-  _cube: {fileID: 6286086767812880020}
 --- !u!1 &588923513605851974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,7 +2655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f808008977fe81b4485bb6cf1f4feb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Helth: 4
+  Health: 4
+  Cube: {fileID: 1973706764236343426}
   Rayfire: {fileID: 4760964041964156528}
   Plane: {fileID: 0}
   RayfireRoot: {fileID: 1769267107096338843}

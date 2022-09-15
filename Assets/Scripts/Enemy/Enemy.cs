@@ -16,6 +16,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected Material DeadEnemyMaterial;
     [SerializeField] protected List<SkinnedMeshRenderer> DeadEnemyMeshRenderers;
     [SerializeField] protected List<Animator> Animators;
+    [SerializeField] protected BombEnemy BombEnemy;
     [SerializeField] private List<Rigidbody> _rigidbodies;
 
     protected BoxCollider BoxCollider;
@@ -36,10 +37,9 @@ public abstract class Enemy : MonoBehaviour
         {
             TakeDamage();
         }
-
     }
 
-    protected virtual void TakeDamage()
+    public virtual void TakeDamage()
     {
         Health--;
 
