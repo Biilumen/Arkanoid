@@ -73,6 +73,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3607223657678835203}
   - component: {fileID: 3607223657678835204}
+  - component: {fileID: 2111607554}
+  - component: {fileID: 2111607550}
+  - component: {fileID: 2111607551}
+  - component: {fileID: 2111607549}
   m_Layer: 0
   m_Name: BombEnemy
   m_TagString: Untagged
@@ -87,7 +91,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3607223657678835205}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0.76199996, y: 0, z: 5.2796783}
   m_LocalScale: {x: 0.69995606, y: 0.508081, z: 0.508081}
   m_Children:
@@ -116,6 +120,60 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &2111607554
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607223657678835205}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &2111607550
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607223657678835205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.26
+  m_Center: {x: 0, y: 0.87, z: 0}
+--- !u!65 &2111607551
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607223657678835205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8368115, y: 4.1242294, z: 1}
+  m_Center: {x: 0.03494763, y: 1.5621141, z: 0}
+--- !u!114 &2111607549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607223657678835205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11702331934fa9642bb084c273a0cacf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3607223657729298817
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +244,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3607223657881671423}
   - component: {fileID: 3607223657881671421}
-  - component: {fileID: 3607223657881671422}
   m_Layer: 0
   m_Name: Stickman_heads_sphere.014
   m_TagString: Untagged
@@ -289,24 +346,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.037385404, y: 0.9172147, z: 0.0996716}
     m_Extent: {x: 0.37010425, y: 0.97310704, z: 0.48474658}
   m_DirtyAABB: 0
---- !u!114 &3607223657881671422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3607223657881671408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0, g: 0, b: 0, a: 1}
-  outlineWidth: 3.31
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1 &3607223657923151054
 GameObject:
   m_ObjectHideFlags: 0
