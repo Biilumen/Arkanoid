@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using RayFire;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent (typeof(BoxCollider))]

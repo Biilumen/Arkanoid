@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using RayFire;
@@ -16,7 +16,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected Material DeadEnemyMaterial;
     [SerializeField] protected List<SkinnedMeshRenderer> DeadEnemyMeshRenderers;
     [SerializeField] protected List<Animator> Animators;
-    [SerializeField] protected BombEnemy BombEnemy;
     [SerializeField] private List<Rigidbody> _rigidbodies;
 
     protected BoxCollider BoxCollider;

@@ -8,7 +8,7 @@ public class BombEnemy : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _renderer;
     [SerializeField] private Material _material;
     [SerializeField] private GameObject _bomb;
-    [SerializeField] private Transform _transform;
+    [SerializeField] private Transform _plane;
 
     private Animator _animator;
     private BoxCollider _boxCollider;
@@ -24,37 +24,51 @@ public class BombEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        _longEnemys.Add(collider.GetComponent<LongEnemy>());
-        _shortEnemys.Add(collider.GetComponent<ShortEnemy>());
+        if (collider.TryGetComponent(out LongEnemy longEnemy))
+            _longEnemys.Add(longEnemy);
+
+        if (collider.TryGetComponent(out ShortEnemy shortEnemy))
+        {
+            _shortEnemys.Add(shortEnemy);
+            shortEnemy.Dead += RemoveEnemy;
+        }
     }
 
     private void OnTriggerExit(Collider collider)
     {
-        _longEnemys.Remove(collider.GetComponent<LongEnemy>());
-        _shortEnemys.Remove(collider.GetComponent<ShortEnemy>());
+        if (collider.TryGetComponent(out LongEnemy longEnemy))
+            _longEnemys.Remove(collider.GetComponent<LongEnemy>());
+
+        if (collider.TryGetComponent(out ShortEnemy shortEnemy))
+            _shortEnemys.Remove(collider.GetComponent<ShortEnemy>());
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Ball ball))
         {
-            
-            foreach(LongEnemy longEnemy in _longEnemys)
+            for(int i = 0; i < _longEnemys.Count; i++)
             {
-                if(longEnemy != null)
-                    longEnemy.TakeDamage();
+                _longEnemys[i].TakeDamage();
             }
 
-            foreach (ShortEnemy shortEnemy in _shortEnemys)
+            for (int i = _shortEnemys.Count - 1; i >= 0; i--)
             {
-                if(shortEnemy != null)
-                    shortEnemy.TakeDamage();
+                _shortEnemys[i].Dead -= RemoveEnemy;
+                _shortEnemys[i].TakeDamage();
             }
 
-        Destroy(_bomb.gameObject);
-        _boxCollider.enabled = false;
-        _renderer.material = _material;
-        _animator.enabled = false;
+            Destroy(_bomb.gameObject);
+            transform.SetParent(_plane);
+            _boxCollider.enabled = false;
+            _renderer.material = _material;
+            _animator.enabled = false;
         }
+    }
+
+    private void RemoveEnemy(ShortEnemy shortEnemy)
+    {
+        _shortEnemys.Remove(shortEnemy);
+        shortEnemy.Dead -= RemoveEnemy;
     }
 }
