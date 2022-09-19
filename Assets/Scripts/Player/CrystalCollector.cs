@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
 
 public class CrystalCollector : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CrystalCollector : MonoBehaviour
     [SerializeField] private Transform _enemy;
 
     private Tween _move;
+
 
     private void OnTriggerEnter(Collider other)
     {
