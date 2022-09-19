@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombEnemy : MonoBehaviour
+public class BombEnemy : MonoBehaviour, IDying
 {
     [SerializeField] private SkinnedMeshRenderer _renderer;
     [SerializeField] private Material _material;
@@ -15,6 +15,8 @@ public class BombEnemy : MonoBehaviour
 
     private List<LongEnemy> _longEnemys = new List<LongEnemy>();
     private List<ShortEnemy> _shortEnemys = new List<ShortEnemy>();
+
+    public event Action Die;
 
     private void Start()
     {
@@ -47,15 +49,18 @@ public class BombEnemy : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Ball ball))
         {
-            for(int i = 0; i < _longEnemys.Count; i++)
+            for (int i = 0; i < _longEnemys.Count; i++)
             {
-                _longEnemys[i].TakeDamage();
-            }
-
+                if(_longEnemys[i] != null)
+                    _longEnemys[i].TakeDamage();
+            }   
             for (int i = _shortEnemys.Count - 1; i >= 0; i--)
             {
-                _shortEnemys[i].Dead -= RemoveEnemy;
-                _shortEnemys[i].TakeDamage();
+                if(_shortEnemys[i] != null)
+                { 
+                    _shortEnemys[i].Dead -= RemoveEnemy;
+                    _shortEnemys[i].TakeDamage();
+                }
             }
 
             Destroy(_bomb.gameObject);
@@ -63,6 +68,7 @@ public class BombEnemy : MonoBehaviour
             _boxCollider.enabled = false;
             _renderer.material = _material;
             _animator.enabled = false;
+            Die.Invoke();
         }
     }
 

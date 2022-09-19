@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &174073230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 174073231}
+  m_Layer: 0
+  m_Name: CrystalSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &174073231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174073230}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.904, z: -0.308}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3546029088041404329}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &521505128438511943
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,6 +2619,7 @@ GameObject:
   - component: {fileID: 1918619108721508087}
   - component: {fileID: 1918619108721508086}
   - component: {fileID: 1918619108721508085}
+  - component: {fileID: 6260453854601070274}
   m_Layer: 0
   m_Name: LongEnemy
   m_TagString: Untagged
@@ -2611,6 +2642,7 @@ Transform:
   - {fileID: 6922884965499316675}
   - {fileID: 6286086767812880020}
   - {fileID: 6350562492444057988}
+  - {fileID: 174073231}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2655,7 +2687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f808008977fe81b4485bb6cf1f4feb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 5
+  HealthPoints: 4
   Cube: {fileID: 1973706764236343426}
   Rayfire: {fileID: 4760964041964156528}
   Plane: {fileID: 0}
@@ -2697,6 +2729,22 @@ MonoBehaviour:
   _gap: {fileID: 2100000, guid: b1ef991befda2724ebbf76bb34708ad3, type: 2}
   _cube: {fileID: 1973706764236343426}
   _boxRenderer: {fileID: 4320810323927908402}
+--- !u!114 &6260453854601070274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4907541310685605155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f9cee9550fca24abfac139f82dbafd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _count: 4
+  _crystalSpawn: {fileID: 174073231}
+  _crystalPrefab: {fileID: 5022989790634182229, guid: 927dd9fd81851be4995c6b00168a645d, type: 3}
+  _ground: {fileID: 0}
 --- !u!1 &5189095290183730552
 GameObject:
   m_ObjectHideFlags: 0
