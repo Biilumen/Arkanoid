@@ -18,7 +18,7 @@ public class LongEnemy : Enemy, IDying
             _boxRenderer.material = _gap;
         }
 
-        if (HealthPoints == 1)
+aa        if (HealthPoints == 1)
         {
             Die?.Invoke();
         }
