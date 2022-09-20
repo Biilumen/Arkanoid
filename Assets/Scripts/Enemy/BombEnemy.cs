@@ -88,6 +88,4 @@ public class BombEnemy : MonoBehaviour, IDying
         _shortEnemys.Remove(shortEnemy);
         shortEnemy.Dead -= RemoveEnemy;
     }
-
-
 }

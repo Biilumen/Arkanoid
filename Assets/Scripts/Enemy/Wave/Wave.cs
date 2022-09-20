@@ -13,6 +13,7 @@ public class Wave : MonoBehaviour
 
     private void OnEnable()
     {
+        print(_enemys.Count);
         foreach (IDying enemy in _enemys) 
         {
             enemy.Die += OnEnemyDie;
@@ -37,6 +38,7 @@ public class Wave : MonoBehaviour
 
     private void OnEnemyDie()
     {
+        print("s");
         _enemyCount--;
 
         if(_enemyCount == 0)
