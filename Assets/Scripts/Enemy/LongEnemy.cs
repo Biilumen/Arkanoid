@@ -13,15 +13,16 @@ public class LongEnemy : Enemy, IDying
 
     public override void TakeDamage()
     {
+        base.TakeDamage();
+
         if (HealthPoints >= 1)
         {
             _boxRenderer.material = _gap;
         }
 
-aa        if (HealthPoints == 1)
+        if (HealthPoints <= 0)
         {
             Die?.Invoke();
         }
-        base.TakeDamage();
     }
 }

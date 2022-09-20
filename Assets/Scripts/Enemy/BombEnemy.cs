@@ -1,7 +1,9 @@
 using System;
-using System.Collections;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using System.Collections;
 
 public class BombEnemy : MonoBehaviour, IDying
 {
@@ -9,9 +11,14 @@ public class BombEnemy : MonoBehaviour, IDying
     [SerializeField] private Material _material;
     [SerializeField] private GameObject _bomb;
     [SerializeField] private Transform _plane;
+    [SerializeField] private ParticleSystem _confettiParticle;
+    [SerializeField] private PlayableDirector _slowMotion;
+    [SerializeField] private Vector3[] _path;
+    [SerializeField] private float _duration;
 
     private Animator _animator;
     private BoxCollider _boxCollider;
+    private Tween _move;
 
     private List<LongEnemy> _longEnemys = new List<LongEnemy>();
     private List<ShortEnemy> _shortEnemys = new List<ShortEnemy>();
@@ -20,6 +27,7 @@ public class BombEnemy : MonoBehaviour, IDying
 
     private void Start()
     {
+        _move = transform.DOLocalPath(_path, _duration).SetLoops(-1).SetEase(Ease.Linear);
         _animator = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider>();
     }
@@ -63,6 +71,9 @@ public class BombEnemy : MonoBehaviour, IDying
                 }
             }
 
+            _move.Kill();
+            _slowMotion.Play();
+            _confettiParticle.Play();
             Destroy(_bomb.gameObject);
             transform.SetParent(_plane);
             _boxCollider.enabled = false;
@@ -77,4 +88,6 @@ public class BombEnemy : MonoBehaviour, IDying
         _shortEnemys.Remove(shortEnemy);
         shortEnemy.Dead -= RemoveEnemy;
     }
+
+
 }

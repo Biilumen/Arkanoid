@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 2111607551}
   - component: {fileID: 2111607549}
   - component: {fileID: 401039280364404141}
-  - component: {fileID: 523636599}
   m_Layer: 0
   m_Name: BombEnemy
   m_TagString: Untagged
@@ -211,6 +210,10 @@ MonoBehaviour:
   _material: {fileID: 2100000, guid: 1578502c273b4994d96d9136c16237da, type: 2}
   _bomb: {fileID: 929795084244940915}
   _plane: {fileID: 0}
+  _confettiParticle: {fileID: 0}
+  _slowMotion: {fileID: 0}
+  _path: []
+  _duration: 0
 --- !u!114 &401039280364404141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,29 +226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f9cee9550fca24abfac139f82dbafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _count: 1
   _crystalSpawn: {fileID: 1175137619}
   _crystalPrefab: {fileID: 5022989790634182229, guid: 927dd9fd81851be4995c6b00168a645d, type: 3}
   _ground: {fileID: 0}
---- !u!320 &523636599
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3607223657678835205}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 6d5c0fe8df5ab8448b2f70cbeddd16bf, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -5596699871398859138, guid: 6d5c0fe8df5ab8448b2f70cbeddd16bf, type: 2}
-    value: {fileID: 3607223657678835204}
-  m_ExposedReferences:
-    m_References: []
 --- !u!1 &3607223657729298817
 GameObject:
   m_ObjectHideFlags: 0
