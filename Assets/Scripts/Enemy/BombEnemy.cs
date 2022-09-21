@@ -61,14 +61,18 @@ public class BombEnemy : MonoBehaviour, IDying
             {
                 if(_longEnemys[i] != null)
                     _longEnemys[i].TakeDamage();
+                else
+                    return;
             }   
             for (int i = _shortEnemys.Count - 1; i >= 0; i--)
             {
-                if(_shortEnemys[i] != null)
-                { 
+                if (_shortEnemys[i] != null)
+                {
                     _shortEnemys[i].Dead -= RemoveEnemy;
                     _shortEnemys[i].TakeDamage();
                 }
+                else
+                    return;
             }
 
             _move.Kill();

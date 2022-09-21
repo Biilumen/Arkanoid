@@ -9,7 +9,7 @@ public class CrystalCollector : MonoBehaviour
     [SerializeField] private float _duration;
     [SerializeField] private Transform _enemy;
 
-    private Tween _move;
+    private List<Tween> _moves;
 
 
     private void OnTriggerEnter(Collider other)
@@ -17,7 +17,7 @@ public class CrystalCollector : MonoBehaviour
         if (other.TryGetComponent(out Crystal crystal))
         {
             crystal.transform.SetParent(_enemy);
-            _move =  crystal.transform.DOLocalMove(transform.localPosition, _duration);
+            _moves.Add(crystal.transform.DOLocalMove(transform.localPosition, _duration));
         }
     }
 
@@ -28,8 +28,7 @@ public class CrystalCollector : MonoBehaviour
             float distance = Vector3.Distance(transform.position, crystal.transform.position);
 
             if (distance < 0.1f)
-            { 
-                _move.Kill();
+            {
                 _particle.Play();
                 Destroy(crystal.gameObject);
             }

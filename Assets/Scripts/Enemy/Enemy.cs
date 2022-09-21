@@ -19,7 +19,6 @@ public abstract class Enemy : MonoBehaviour
 
     protected BoxCollider BoxCollider;
 
-
     protected void Start()
     {
         BoxCollider = GetComponent<BoxCollider>();

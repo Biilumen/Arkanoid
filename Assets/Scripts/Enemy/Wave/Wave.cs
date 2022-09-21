@@ -5,40 +5,37 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
-    [SerializeField] private int _enemyCount;
-  
-    private List<IDying> _enemys = new List<IDying>();
+    [SerializeField] private List<GameObject> _enemys;
+
+    private int _enemyCount;
+    private List<IDying> _Dyings = new List<IDying>();
 
     public event Action Empty;
 
     private void OnEnable()
     {
-        print(_enemys.Count);
-        foreach (IDying enemy in _enemys) 
+        foreach (GameObject enemy in _enemys) 
         {
-            enemy.Die += OnEnemyDie;
+            _Dyings.Add(enemy.GetComponent<IDying>());
         }
+
+        foreach(IDying dying in _Dyings)
+        {
+            dying.Die += OnEnemyDie;
+        }
+        _enemyCount = _Dyings.Count;
     }
 
     private void OnDisable()
     {
-        foreach (IDying enemy in _enemys)
+        foreach (IDying dying in _Dyings)
         {
-            enemy.Die -= OnEnemyDie;
-        }
-    }
-
-    private void Awake()
-    {
-        for (int i = 0; i < _enemyCount; i++)
-        {
-            _enemys.Add(GetComponentInChildren<IDying>());
+            dying.Die += OnEnemyDie;
         }
     }
 
     private void OnEnemyDie()
     {
-        print("s");
         _enemyCount--;
 
         if(_enemyCount == 0)
