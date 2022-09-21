@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using RayFire;
 
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] protected int Health;
+    [SerializeField] protected int HealthPoints;
     [SerializeField] protected GameObject Cube;
     [SerializeField] protected RayfireBomb Rayfire;
     [SerializeField] protected Transform Plane;
@@ -40,9 +39,9 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void TakeDamage()
     {
-        Health--;
+        HealthPoints--;
 
-        if (Health <= 0)
+        if (HealthPoints <= 0)
         {
             RayfireRoot.Initialize();
             Rayfire.Explode(0f);
