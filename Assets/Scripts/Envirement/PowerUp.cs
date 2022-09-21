@@ -9,10 +9,8 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-            print("q");
-        if (other.gameObject.TryGetComponent(out Player player))
-        {
-            print("q1");
+        if (other.gameObject.TryGetComponent(out Player player)) 
+        { 
             PowerUped?.Invoke();
             Destroy(gameObject);
         }

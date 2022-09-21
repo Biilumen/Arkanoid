@@ -7,7 +7,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private ParticleSystem _colisionParticle;
     [SerializeField] private ParticleSystem _fireParticle;
-    [SerializeField] private PowerUp _firePowerUp; 
+    [SerializeField] private PowerUp _firePowerUp;
+    [SerializeField] private SizeUp _sizeUp;
+    [SerializeField] private float _size;
 
     private Rigidbody _rigidbody;
     private Vector3 _reflectDirection = Vector3.back;
@@ -15,11 +17,13 @@ public class Ball : MonoBehaviour
     private void OnEnable()
     {
         _firePowerUp.PowerUped += PowerUp;
+        _sizeUp.SizeUped += SizeUp;
     }
 
     private void OnDisable()
     {
         _firePowerUp.PowerUped -= PowerUp;
+        _sizeUp.SizeUped -= SizeUp;
     }
 
     void Start()
@@ -39,5 +43,10 @@ public class Ball : MonoBehaviour
     private void PowerUp()
     {
         _fireParticle.Play();
+    }
+
+    private void SizeUp()
+    {
+        transform.localScale = transform.localScale * _size;
     }
 }
