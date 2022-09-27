@@ -12,9 +12,11 @@ public class BombEnemy : MonoBehaviour, IDying
     [SerializeField] private GameObject _bomb;
     [SerializeField] private Transform _plane;
     [SerializeField] private ParticleSystem _confettiParticle;
+    [SerializeField] private ParticleSystem _wickSparcsParticle;
     [SerializeField] private PlayableDirector _slowMotion;
     [SerializeField] private Vector3[] _path;
     [SerializeField] private float _duration;
+    [SerializeField] private bool _patrool;
 
     private Animator _animator;
     private BoxCollider _boxCollider;
@@ -27,7 +29,11 @@ public class BombEnemy : MonoBehaviour, IDying
 
     private void Start()
     {
-        _move = transform.DOLocalPath(_path, _duration).SetLoops(-1).SetEase(Ease.Linear);
+        if (_patrool)
+        {
+            _move = transform.DOLocalPath(_path, _duration).SetLoops(-1).SetEase(Ease.Linear);
+        }
+
         _animator = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider>();
     }
@@ -75,16 +81,22 @@ public class BombEnemy : MonoBehaviour, IDying
                     return;
             }
 
-            _move.Kill();
-            _slowMotion.Play();
-            _confettiParticle.Play();
-            Destroy(_bomb.gameObject);
-            transform.SetParent(_plane);
-            _boxCollider.enabled = false;
-            _renderer.material = _material;
-            _animator.enabled = false;
-            Die.Invoke();
+            Deactivate();
         }
+    }
+
+    private void Deactivate()
+    {
+        _move.Kill();
+        _slowMotion.Play();
+        _confettiParticle.Play();
+        _wickSparcsParticle.Stop();
+        Destroy(_bomb.gameObject);
+        transform.SetParent(_plane);
+        _boxCollider.enabled = false;
+        _renderer.material = _material;
+        _animator.enabled = false;
+        Die.Invoke();
     }
 
     private void RemoveEnemy(ShortEnemy shortEnemy)

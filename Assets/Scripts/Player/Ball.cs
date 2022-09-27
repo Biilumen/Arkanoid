@@ -3,7 +3,6 @@ using UnityEngine;
 [ExecuteAlways]
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private Transform _previousPosition;
     [SerializeField] private float _speed;
     [SerializeField] private ParticleSystem _colisionParticle;
     [SerializeField] private ParticleSystem _fireParticle;
