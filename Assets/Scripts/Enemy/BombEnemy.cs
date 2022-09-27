@@ -15,6 +15,7 @@ public class BombEnemy : MonoBehaviour, IDying
     [SerializeField] private PlayableDirector _slowMotion;
     [SerializeField] private Vector3[] _path;
     [SerializeField] private float _duration;
+    [SerializeField] private bool _patrool;
 
     private Animator _animator;
     private BoxCollider _boxCollider;
@@ -27,7 +28,11 @@ public class BombEnemy : MonoBehaviour, IDying
 
     private void Start()
     {
-        _move = transform.DOLocalPath(_path, _duration).SetLoops(-1).SetEase(Ease.Linear);
+        if (_patrool)
+        {
+            _move = transform.DOLocalPath(_path, _duration).SetLoops(-1).SetEase(Ease.Linear);
+        }
+
         _animator = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider>();
     }

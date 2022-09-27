@@ -7,6 +7,7 @@ public class CrystalSpawn : MonoBehaviour
     [SerializeField] private Transform _crystalSpawn;
     [SerializeField] private GameObject _crystalPrefab;
     [SerializeField] private Transform _ground;
+    [SerializeField] private ParticleSystem _Score;
 
     private IDying _enemy;
 
@@ -27,6 +28,7 @@ public class CrystalSpawn : MonoBehaviour
 
     private void OnEnemyDiy()
     {
+        _Score.Play();
         Instantiate(_crystalPrefab, _crystalSpawn.position, Quaternion.identity, _ground);
     }
 }
