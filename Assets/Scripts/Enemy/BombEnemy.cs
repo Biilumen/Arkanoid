@@ -12,6 +12,7 @@ public class BombEnemy : MonoBehaviour, IDying
     [SerializeField] private GameObject _bomb;
     [SerializeField] private Transform _plane;
     [SerializeField] private ParticleSystem _confettiParticle;
+    [SerializeField] private ParticleSystem _wickSparcsParticle;
     [SerializeField] private PlayableDirector _slowMotion;
     [SerializeField] private Vector3[] _path;
     [SerializeField] private float _duration;
@@ -80,16 +81,22 @@ public class BombEnemy : MonoBehaviour, IDying
                     return;
             }
 
-            _move.Kill();
-            _slowMotion.Play();
-            _confettiParticle.Play();
-            Destroy(_bomb.gameObject);
-            transform.SetParent(_plane);
-            _boxCollider.enabled = false;
-            _renderer.material = _material;
-            _animator.enabled = false;
-            Die.Invoke();
+            Deactivate();
         }
+    }
+
+    private void Deactivate()
+    {
+        _move.Kill();
+        _slowMotion.Play();
+        _confettiParticle.Play();
+        _wickSparcsParticle.Stop();
+        Destroy(_bomb.gameObject);
+        transform.SetParent(_plane);
+        _boxCollider.enabled = false;
+        _renderer.material = _material;
+        _animator.enabled = false;
+        Die.Invoke();
     }
 
     private void RemoveEnemy(ShortEnemy shortEnemy)

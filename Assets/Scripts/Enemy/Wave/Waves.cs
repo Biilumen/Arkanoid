@@ -2,12 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using TMPro;
+using UnityEngine.Serialization;
 
 public class Waves : MonoBehaviour
 {
-    [SerializeField] private List<Wave> waves;
+    [FormerlySerializedAs("waves")] [SerializeField] private List<Wave> _waves;
     [SerializeField] private float _duration;
     [SerializeField] private float _distance;
+    [SerializeField] private TMP_Text _text;
+
+    private int _index;
 
     private int _wavesCount;
 
@@ -15,8 +20,10 @@ public class Waves : MonoBehaviour
 
     private void OnEnable()
     {
-        _wavesCount = waves.Count;
-        foreach (Wave wave in waves)
+        _wavesCount = _waves.Count;
+        _text.text = ($"{_index}/ {_waves.Count}");
+
+        foreach (Wave wave in _waves)
         {
             wave.Empty += OnWaveEmty;
         }
@@ -24,7 +31,7 @@ public class Waves : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (Wave wave in waves)
+        foreach (Wave wave in _waves)
         {
             wave.Empty += OnWaveEmty;
         }
@@ -38,6 +45,12 @@ public class Waves : MonoBehaviour
         if(_wavesCount == 0)
         {
             FinalWave?.Invoke();
+        }
+
+        if (_index != _wavesCount)
+        {
+            _index++;
+            _text.text = ($"{_index}/ {_waves.Count}");
         }
     }
 }
