@@ -3,7 +3,6 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-using System.Collections;
 
 public class BombEnemy : MonoBehaviour, IDying
 {

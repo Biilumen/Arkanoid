@@ -11,7 +11,6 @@ public class CrystalCollector : MonoBehaviour
 
     private List<Tween> _moves;
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Crystal crystal))

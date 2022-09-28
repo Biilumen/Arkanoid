@@ -1,12 +1,9 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent (typeof(BoxCollider))]
 public class LongEnemy : Enemy, IDying
 {
     [SerializeField] private Material _gap;
-    [SerializeField] private GameObject _cube;
     [SerializeField] private MeshRenderer _boxRenderer;
 
     public event Action Die;
