@@ -1,60 +1,107 @@
 using System;
-using System.Collections;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using System.Collections;
 
-public class BombEnemy : MonoBehaviour
+public class BombEnemy : MonoBehaviour, IDying
 {
     [SerializeField] private SkinnedMeshRenderer _renderer;
     [SerializeField] private Material _material;
     [SerializeField] private GameObject _bomb;
-    [SerializeField] private Transform _transform;
+    [SerializeField] private Transform _plane;
+    [SerializeField] private ParticleSystem _confettiParticle;
+    [SerializeField] private ParticleSystem _wickSparcsParticle;
+    [SerializeField] private PlayableDirector _slowMotion;
+    [SerializeField] private Vector3[] _path;
+    [SerializeField] private float _duration;
+    [SerializeField] private bool _patrool;
 
     private Animator _animator;
     private BoxCollider _boxCollider;
+    private Tween _move;
 
     private List<LongEnemy> _longEnemys = new List<LongEnemy>();
     private List<ShortEnemy> _shortEnemys = new List<ShortEnemy>();
 
+    public event Action Die;
+
     private void Start()
     {
+        if (_patrool)
+        {
+            _move = transform.DOLocalPath(_path, _duration).SetLoops(-1).SetEase(Ease.Linear);
+        }
+
         _animator = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider>();
     }
 
     private void OnTriggerEnter(Collider collider)
     {
-        _longEnemys.Add(collider.GetComponent<LongEnemy>());
-        _shortEnemys.Add(collider.GetComponent<ShortEnemy>());
+        if (collider.TryGetComponent(out LongEnemy longEnemy))
+            _longEnemys.Add(longEnemy);
+
+        if (collider.TryGetComponent(out ShortEnemy shortEnemy))
+        {
+            _shortEnemys.Add(shortEnemy);
+            shortEnemy.Dead += RemoveEnemy;
+        }
     }
 
     private void OnTriggerExit(Collider collider)
     {
-        _longEnemys.Remove(collider.GetComponent<LongEnemy>());
-        _shortEnemys.Remove(collider.GetComponent<ShortEnemy>());
+        if (collider.TryGetComponent(out LongEnemy longEnemy))
+            _longEnemys.Remove(collider.GetComponent<LongEnemy>());
+
+        if (collider.TryGetComponent(out ShortEnemy shortEnemy))
+            _shortEnemys.Remove(collider.GetComponent<ShortEnemy>());
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Ball ball))
         {
-            
-            foreach(LongEnemy longEnemy in _longEnemys)
+            for (int i = 0; i < _longEnemys.Count; i++)
             {
-                if(longEnemy != null)
-                    longEnemy.TakeDamage();
+                if(_longEnemys[i] != null)
+                    _longEnemys[i].TakeDamage();
+                else
+                    return;
+            }   
+            for (int i = _shortEnemys.Count - 1; i >= 0; i--)
+            {
+                if (_shortEnemys[i] != null)
+                {
+                    _shortEnemys[i].Dead -= RemoveEnemy;
+                    _shortEnemys[i].TakeDamage();
+                }
+                else
+                    return;
             }
 
-            foreach (ShortEnemy shortEnemy in _shortEnemys)
-            {
-                if(shortEnemy != null)
-                    shortEnemy.TakeDamage();
-            }
+            Deactivate();
+        }
+    }
 
+    private void Deactivate()
+    {
+        _move.Kill();
+        _slowMotion.Play();
+        _confettiParticle.Play();
+        _wickSparcsParticle.Stop();
         Destroy(_bomb.gameObject);
+        transform.SetParent(_plane);
         _boxCollider.enabled = false;
         _renderer.material = _material;
         _animator.enabled = false;
-        }
+        Die.Invoke();
+    }
+
+    private void RemoveEnemy(ShortEnemy shortEnemy)
+    {
+        _shortEnemys.Remove(shortEnemy);
+        shortEnemy.Dead -= RemoveEnemy;
     }
 }

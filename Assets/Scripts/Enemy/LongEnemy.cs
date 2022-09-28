@@ -1,22 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using RayFire;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent (typeof(BoxCollider))]
-public class LongEnemy : Enemy
+public class LongEnemy : Enemy, IDying
 {
     [SerializeField] private Material _gap;
     [SerializeField] private GameObject _cube;
     [SerializeField] private MeshRenderer _boxRenderer;
 
+    public event Action Die;
+
     public override void TakeDamage()
     {
-        if (Health >= 1)
+        base.TakeDamage();
+
+        if (HealthPoints >= 1)
         {
             _boxRenderer.material = _gap;
         }
-        base.TakeDamage();
+
+        if (HealthPoints <= 0)
+        {
+            Die?.Invoke();
+        }
     }
 }
