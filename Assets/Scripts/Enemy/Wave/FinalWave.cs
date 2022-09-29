@@ -56,6 +56,8 @@ public class FinalWave : MonoBehaviour
     {
         _balls[0].velocity = Vector3.zero;
         _balls[0].transform.position = _ballposition.position;
+        Ball ball = _balls[0].GetComponent<Ball>();
+        ball.SetReflect();
         yield return new WaitForSeconds(0.5f);
         _balls[0].AddForce(Vector3.back * 2, ForceMode.Impulse);
     }

@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private ParticleSystem _fireParticle;
     [SerializeField] private PowerUp _firePowerUp;
     [SerializeField] private SizeUp _sizeUp;
+    [SerializeField] private TrailRenderer _trail;
 
     private Rigidbody _rigidbody;
     private Vector3 _reflectDirection = Vector3.back;
@@ -24,7 +25,7 @@ public class Ball : MonoBehaviour
         _sizeUp.SizeUped -= SizeUp;
     }
 
-    void Start()
+    private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.AddForce(_reflectDirection*_speed, ForceMode.Impulse);
@@ -46,5 +47,11 @@ public class Ball : MonoBehaviour
     private void SizeUp()
     {
         transform.localScale = transform.localScale * _size;
+    }
+
+    public void SetReflect()
+    {
+        _reflectDirection = Vector3.back;
+        _trail.Clear();
     }
 }

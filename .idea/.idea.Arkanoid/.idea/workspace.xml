@@ -28,7 +28,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.build.unityPlugin&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -78,6 +78,8 @@
       <workItem from="1664249145876" duration="1953000" />
       <workItem from="1664269164121" duration="3254000" />
       <workItem from="1664336938750" duration="883000" />
+      <workItem from="1664450895853" duration="4186000" />
+      <workItem from="1664468397278" duration="2069000" />
     </task>
     <servers />
   </component>
@@ -100,5 +102,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

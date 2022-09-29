@@ -137,6 +137,12 @@ public class Outline : MonoBehaviour {
     }
   }
 
+  private void OnCollisionEnter(Collision collision)
+  {
+    if (collision.gameObject.TryGetComponent(out Ball ball))
+      enabled = false;
+  }
+
   void OnDisable() {
     foreach (var renderer in renderers) {
 
