@@ -3,15 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - block
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Balls
   - Water
   - UI
-  - 
+  - Blocks
   - 
   - 
   - 

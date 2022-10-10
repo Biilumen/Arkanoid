@@ -1,11 +1,17 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using RayFire;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(BoxCollider))]
 public abstract class Enemy : MonoBehaviour
 {
+    [FormerlySerializedAs("Cuberoot")] [SerializeField] protected Transform CubeRoot;
+    [FormerlySerializedAs("_rigidbodies")] [SerializeField] protected List<Rigidbody> Rigidbodies;
+    [SerializeField] protected float Offset;
     [SerializeField] protected int HealthPoints;
+    [SerializeField] protected float Duration;
     [SerializeField] protected GameObject Cube;
     [SerializeField] protected RayfireBomb Rayfire;
     [SerializeField] protected Transform Plane;
@@ -14,15 +20,15 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected Material DeadEnemyMaterial;
     [SerializeField] protected List<SkinnedMeshRenderer> DeadEnemyMeshRenderers;
     [SerializeField] protected List<Animator> Animators;
-    [SerializeField] protected List<Rigidbody> _rigidbodies;
-
+    [SerializeField] protected List<Transform> BlocksTransforms;
+    
     protected BoxCollider BoxCollider;
 
     protected void Start()
     {
         BoxCollider = GetComponent<BoxCollider>();
 
-        foreach (var rigidbody in _rigidbodies)
+        foreach (var rigidbody in Rigidbodies)
         {
             rigidbody.isKinematic = true;
         }
@@ -47,6 +53,11 @@ public abstract class Enemy : MonoBehaviour
             BoxCollider.enabled = false;
             Destroy(Cube.gameObject);
 
+            foreach (var block in BlocksTransforms)
+            {
+                block.transform.DOMoveY(block.transform.position.y + Offset, Duration);
+            }
+
             foreach (var animator in Animators)
             {
                 animator.enabled = false;
@@ -62,10 +73,12 @@ public abstract class Enemy : MonoBehaviour
                 transform.SetParent(Plane);
             }
 
-            foreach (var rigidbody in _rigidbodies)
+            foreach (var rigidbody in Rigidbodies)
             {
                 rigidbody.isKinematic = false;
             }
+            
+            CubeRoot.SetParent(null);
         }
     }
 }

@@ -10,6 +10,10 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6b1444477c1d41c692ef6c02a838308529ac30/29/80f3eea2/IComparable`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ShatredBlock.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -80,6 +84,9 @@
       <workItem from="1664336938750" duration="883000" />
       <workItem from="1664450895853" duration="4186000" />
       <workItem from="1664468397278" duration="2663000" />
+      <workItem from="1665071926181" duration="647000" />
+      <workItem from="1665076040255" duration="4452000" />
+      <workItem from="1665122607378" duration="11473000" />
     </task>
     <servers />
   </component>
